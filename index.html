@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mutia & Dede R | Wedding Invitation</title>
+<title>Mutia & Dede | Wedding Invitation</title>
 
 <style>
 html { scroll-behavior: smooth; }
@@ -12,8 +12,10 @@ body {
   margin: 0;
   font-family: 'Georgia', serif;
   color: #fff;
+  overflow-x: hidden;
 }
 
+/* BACKGROUND TEMA ASMARA */
 section {
   min-height: 100vh;
   padding: 60px 20px;
@@ -22,28 +24,28 @@ section {
   align-items: center;
   text-align: center;
   position: relative;
+  background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url("https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e");
+  background-size: cover;
+  background-position: center;
 }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-}
-
+/* KONTEN */
 .content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   max-width: 520px;
 }
 
 h1 { font-size: 36px; margin: 10px 0; }
 h2 { font-size: 24px; }
-p { font-size: 16px; line-height: 1.7; }
+p  { font-size: 16px; line-height: 1.8; }
 
 .divider {
   width: 70px;
   height: 2px;
-  background: #c9a14a;
+  background: #e6c77b;
   margin: 20px auto;
 }
 
@@ -51,18 +53,18 @@ p { font-size: 16px; line-height: 1.7; }
   margin-top: 30px;
   padding: 12px 30px;
   border-radius: 30px;
-  background: #c9a14a;
+  background: #e6c77b;
   color: #fff;
   text-decoration: none;
   display: inline-block;
 }
 
-/* tombol musik */
+/* MUSIK BUTTON */
 .music-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #c9a14a;
+  background: #e6c77b;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -73,18 +75,30 @@ p { font-size: 16px; line-height: 1.7; }
   cursor: pointer;
   z-index: 999;
 }
+
+/* ANIMASI BUNGA JATUH */
+.flower {
+  position: fixed;
+  top: -10%;
+  font-size: 18px;
+  animation: fall linear infinite;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
 </style>
 </head>
 
 <body ontouchstart="initAudio()">
 
-<!-- AUDIO (ONLINE) -->
-<audio id="bgm"
-  preload="auto"
-  loop
-  playsinline
-  webkit-playsinline>
-  <source src="https://cdn.pixabay.com/download/audio/2022/02/23/audio_5f6c2c1c9f.mp3" type="audio/mpeg">
+<!-- AUDIO BACKGROUND (AMAN & LEMBUT) -->
+<audio id="bgm" preload="auto" loop playsinline webkit-playsinline>
+  <source src="https://cdn.pixabay.com/download/audio/2023/02/28/audio_6b5c4df4c2.mp3" type="audio/mpeg">
 </audio>
 
 <div class="music-btn" onclick="toggleMusic()">🎵</div>
@@ -102,27 +116,30 @@ function initAudio() {
 
 function toggleMusic() {
   const audio = document.getElementById("bgm");
-
-  if (!audioReady) {
-    initAudio();
-  }
+  if (!audioReady) initAudio();
 
   if (!playing) {
-    audio.play().then(() => {
-      playing = true;
-    }).catch(() => {
-      alert("Klik layar sekali lalu tekan 🎵");
-    });
+    audio.play().then(()=>playing=true).catch(()=>alert("Tap layar lalu tekan 🎵"));
   } else {
     audio.pause();
     playing = false;
   }
 }
+
+/* GENERATE BUNGA JATUH */
+for (let i = 0; i < 20; i++) {
+  const flower = document.createElement("div");
+  flower.className = "flower";
+  flower.innerHTML = "🌸";
+  flower.style.left = Math.random() * 100 + "vw";
+  flower.style.animationDuration = (5 + Math.random() * 5) + "s";
+  flower.style.fontSize = (14 + Math.random() * 20) + "px";
+  document.body.appendChild(flower);
+}
 </script>
 
 <!-- COVER -->
-<section style="background:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e') center/cover;">
-  <div class="overlay"></div>
+<section>
   <div class="content">
     <p>The Wedding Of</p>
     <h1>MUTIA</h1>
@@ -130,25 +147,48 @@ function toggleMusic() {
     <h1>DEDE</h1>
     <p>27 Juli 2027</p>
     <a href="#akad" class="btn">Buka Undangan</a>
-    <p style="margin-top:15px;font-size:14px;">Tap layar lalu klik 🎵</p>
+    <p style="font-size:14px;margin-top:15px;">Tap 🎵 untuk musik</p>
   </div>
 </section>
 
-<section id="akad" style="background:url('https://images.unsplash.com/photo-1606214174585-fe31582dc6ee') center/cover;">
-  <div class="overlay"></div>
+<!-- AYAT AL-QURAN -->
+<section>
+  <div class="content">
+    <h2>QS. Ar-Rum : 21</h2>
+    <div class="divider"></div>
+    <p style="font-size:18px;">
+      وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا
+      لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً
+    </p>
+    <p style="font-size:15px;margin-top:20px;">
+      “Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan
+      untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya,
+      dan Dia menjadikan di antaramu rasa kasih dan sayang.”
+    </p>
+  </div>
+</section>
+
+<!-- AKAD -->
+<section id="akad">
   <div class="content">
     <h2>Akad Nikah</h2>
     <div class="divider"></div>
-    <p>📅 27 Juli 2027<br>📍 Masjid Nabawi</p>
+    <p>
+      📅 27 Juli 2027<br>
+      📍 Masjid Nabawi
+    </p>
   </div>
 </section>
 
-<section style="background:url('https://images.unsplash.com/photo-1504805572947-34fad45aed93') center/cover;">
-  <div class="overlay"></div>
+<!-- RESEPSI -->
+<section>
   <div class="content">
     <h2>Resepsi</h2>
     <div class="divider"></div>
-    <p>📅 28 Agustus 2028<br>📍 IKN</p>
+    <p>
+      📅 28 Agustus 2028<br>
+      📍 IKN
+    </p>
   </div>
 </section>
 
