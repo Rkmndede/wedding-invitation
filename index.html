@@ -11,184 +11,202 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: 'Georgia', serif;
-  color: #fff;
-  overflow-x: hidden;
+  background: #f3e1e3;
+  color: #5a2a2a;
 }
 
-/* BACKGROUND TEMA ASMARA */
+/* ===== SECTION ===== */
 section {
   min-height: 100vh;
-  padding: 60px 20px;
+  padding: 50px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  position: relative;
-  background:
-    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    url("https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e");
-  background-size: cover;
-  background-position: center;
 }
 
-/* KONTEN */
-.content {
-  position: relative;
-  z-index: 3;
-  max-width: 520px;
+.container {
+  max-width: 420px;
+  margin: auto;
 }
 
-h1 { font-size: 36px; margin: 10px 0; }
-h2 { font-size: 24px; }
-p  { font-size: 16px; line-height: 1.8; }
+/* ===== COVER ===== */
+.cover {
+  background: linear-gradient(#f6e6e9, #f3e1e3);
+}
 
-.divider {
-  width: 70px;
-  height: 2px;
-  background: #e6c77b;
-  margin: 20px auto;
+.title {
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.names {
+  font-size: 38px;
+  font-family: 'Brush Script MT', cursive;
+  margin: 10px 0;
 }
 
 .btn {
   margin-top: 30px;
-  padding: 12px 30px;
+  padding: 14px 30px;
   border-radius: 30px;
-  background: #e6c77b;
+  background: #7a2d2d;
   color: #fff;
   text-decoration: none;
   display: inline-block;
 }
 
-/* MUSIK BUTTON */
+/* ===== IMAGE ===== */
+.circle-img {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: #efd6da;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-img img {
+  width: 80%;
+}
+
+/* ===== COUNTDOWN ===== */
+.countdown {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.countdown div {
+  background: #7a2d2d;
+  color: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  width: 22%;
+  font-size: 14px;
+}
+
+/* ===== AYAT ===== */
+.ayat {
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.arti {
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+/* ===== MUSIK ===== */
 .music-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #e6c77b;
+  background: #7a2d2d;
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  color: #fff;
+  font-size: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 22px;
   cursor: pointer;
-  z-index: 999;
-}
-
-/* ANIMASI BUNGA JATUH */
-.flower {
-  position: fixed;
-  top: -10%;
-  font-size: 18px;
-  animation: fall linear infinite;
-  opacity: 0.8;
-  z-index: 1;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-  }
 }
 </style>
 </head>
 
-<body ontouchstart="initAudio()">
+<body>
 
-<!-- AUDIO BACKGROUND (AMAN & LEMBUT) -->
-<audio id="bgm" preload="auto" loop playsinline webkit-playsinline>
-  <source src="https://cdn.pixabay.com/download/audio/2023/02/28/audio_6b5c4df4c2.mp3" type="audio/mpeg">
+<!-- AUDIO -->
+<audio id="bgm" loop playsinline>
+  <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_2c7a8b6f44.mp3" type="audio/mpeg">
 </audio>
 
 <div class="music-btn" onclick="toggleMusic()">🎵</div>
 
 <script>
-let audioReady = false;
 let playing = false;
-
-function initAudio() {
-  if (audioReady) return;
+function toggleMusic(){
   const audio = document.getElementById("bgm");
-  audio.volume = 0.6;
-  audioReady = true;
-}
-
-function toggleMusic() {
-  const audio = document.getElementById("bgm");
-  if (!audioReady) initAudio();
-
-  if (!playing) {
-    audio.play().then(()=>playing=true).catch(()=>alert("Tap layar lalu tekan 🎵"));
+  if(!playing){
+    audio.play();
+    playing = true;
   } else {
     audio.pause();
     playing = false;
   }
 }
-
-/* GENERATE BUNGA JATUH */
-for (let i = 0; i < 20; i++) {
-  const flower = document.createElement("div");
-  flower.className = "flower";
-  flower.innerHTML = "🌸";
-  flower.style.left = Math.random() * 100 + "vw";
-  flower.style.animationDuration = (5 + Math.random() * 5) + "s";
-  flower.style.fontSize = (14 + Math.random() * 20) + "px";
-  document.body.appendChild(flower);
-}
 </script>
 
-<!-- COVER -->
-<section>
-  <div class="content">
-    <p>The Wedding Of</p>
-    <h1>MUTIA</h1>
-    <div class="divider"></div>
-    <h1>DEDE</h1>
-    <p>27 Juli 2027</p>
-    <a href="#akad" class="btn">Buka Undangan</a>
-    <p style="font-size:14px;margin-top:15px;">Tap 🎵 untuk musik</p>
+<!-- ===== SCREEN 1 ===== -->
+<section class="cover">
+  <div class="container">
+    <div class="circle-img">
+      <img src="https://cdn-icons-png.flaticon.com/512/2922/2922561.png">
+    </div>
+    <p class="title">THE WEDDING OF</p>
+    <div class="names">Mutia & Dede</div>
+    <p>Kepada Yth.<br><strong>Tamu Undangan</strong></p>
+    <a href="#main" class="btn">Buka Undangan</a>
   </div>
 </section>
 
-<!-- AYAT AL-QURAN -->
+<!-- ===== SCREEN 2 ===== -->
+<section id="main">
+  <div class="container">
+    <p class="title">THE WEDDING OF</p>
+
+    <div class="circle-img">
+      <img src="https://cdn-icons-png.flaticon.com/512/2922/2922656.png">
+    </div>
+
+    <div class="names">Mutia & Dede</div>
+    <p>Kami berharap Anda menjadi bagian dari hari istimewa kami</p>
+
+    <div class="countdown">
+      <div>27<br>Hari</div>
+      <div>08<br>Jam</div>
+      <div>00<br>Menit</div>
+      <div>00<br>Detik</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AYAT ===== -->
 <section>
-  <div class="content">
-    <h2>QS. Ar-Rum : 21</h2>
-    <div class="divider"></div>
-    <p style="font-size:18px;">
+  <div class="container">
+    <h3>QS. Ar-Rum : 21</h3>
+    <p class="ayat">
       وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا
       لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً
     </p>
-    <p style="font-size:15px;margin-top:20px;">
+    <p class="arti">
       “Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan
-      untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya,
+      untukmu dari jenismu sendiri, agar kamu merasa tenteram kepadanya,
       dan Dia menjadikan di antaramu rasa kasih dan sayang.”
     </p>
   </div>
 </section>
 
-<!-- AKAD -->
-<section id="akad">
-  <div class="content">
-    <h2>Akad Nikah</h2>
-    <div class="divider"></div>
-    <p>
-      📅 27 Juli 2027<br>
-      📍 Masjid Nabawi
-    </p>
-  </div>
-</section>
-
-<!-- RESEPSI -->
+<!-- ===== MEMPELAI ===== -->
 <section>
-  <div class="content">
-    <h2>Resepsi</h2>
-    <div class="divider"></div>
-    <p>
-      📅 28 Agustus 2028<br>
-      📍 IKN
-    </p>
+  <div class="container">
+    <div class="circle-img">
+      <img src="https://cdn-icons-png.flaticon.com/512/2922/2922710.png">
+    </div>
+    <h3>Mutia Burhani</h3>
+    <p>Putri dari keluarga tercinta</p>
+
+    <br>
+
+    <div class="circle-img">
+      <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png">
+    </div>
+    <h3>Dede Rukmana</h3>
+    <p>Putra dari keluarga tercinta</p>
   </div>
 </section>
 
