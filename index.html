@@ -14,7 +14,6 @@ body {
   color: #fff;
 }
 
-/* SECTION */
 section {
   min-height: 100vh;
   padding: 60px 20px;
@@ -58,7 +57,7 @@ p { font-size: 16px; line-height: 1.7; }
   display: inline-block;
 }
 
-/* TOMBOL MUSIK */
+/* tombol musik */
 .music-btn {
   position: fixed;
   bottom: 20px;
@@ -77,26 +76,43 @@ p { font-size: 16px; line-height: 1.7; }
 </style>
 </head>
 
-<body>
+<body ontouchstart="initAudio()">
 
-<!-- AUDIO ONLINE -->
-<audio id="bgm" preload="auto" loop>
+<!-- AUDIO (ONLINE) -->
+<audio id="bgm"
+  preload="auto"
+  loop
+  playsinline
+  webkit-playsinline>
   <source src="https://cdn.pixabay.com/download/audio/2022/02/23/audio_5f6c2c1c9f.mp3" type="audio/mpeg">
 </audio>
 
-<!-- TOMBOL MUSIK -->
 <div class="music-btn" onclick="toggleMusic()">🎵</div>
 
 <script>
+let audioReady = false;
 let playing = false;
+
+function initAudio() {
+  if (audioReady) return;
+  const audio = document.getElementById("bgm");
+  audio.volume = 0.6;
+  audioReady = true;
+}
+
 function toggleMusic() {
   const audio = document.getElementById("bgm");
-  audio.muted = false;
-  audio.volume = 0.6;
+
+  if (!audioReady) {
+    initAudio();
+  }
 
   if (!playing) {
-    audio.play();
-    playing = true;
+    audio.play().then(() => {
+      playing = true;
+    }).catch(() => {
+      alert("Klik layar sekali lalu tekan 🎵");
+    });
   } else {
     audio.pause();
     playing = false;
@@ -114,11 +130,10 @@ function toggleMusic() {
     <h1>DEDE</h1>
     <p>27 Juli 2027</p>
     <a href="#akad" class="btn">Buka Undangan</a>
-    <p style="margin-top:15px;font-size:14px;">Klik ikon 🎵 untuk musik</p>
+    <p style="margin-top:15px;font-size:14px;">Tap layar lalu klik 🎵</p>
   </div>
 </section>
 
-<!-- AKAD -->
 <section id="akad" style="background:url('https://images.unsplash.com/photo-1606214174585-fe31582dc6ee') center/cover;">
   <div class="overlay"></div>
   <div class="content">
@@ -128,7 +143,6 @@ function toggleMusic() {
   </div>
 </section>
 
-<!-- RESEPSI -->
 <section style="background:url('https://images.unsplash.com/photo-1504805572947-34fad45aed93') center/cover;">
   <div class="overlay"></div>
   <div class="content">
